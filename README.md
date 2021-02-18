@@ -1,5 +1,7 @@
 # SendPulse Laravel Helper
 
+[![Build Status](https://travis-ci.org/dvomaks/laravel-sendpulse.svg?branch=master)](https://travis-ci.org/dvomaks/laravel-sendpulse)
+
 A service provider and facade to set up and use the [SendPulse](https://sendpulse.com/) PHP library in Laravel 5.
 
 This package consists of a service provider, which binds an instance of an initialized SendPulse client to the
