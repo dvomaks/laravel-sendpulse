@@ -1,8 +1,6 @@
 <?php
 
-namespace SendPulse\SendPulseLaravel;
-
-use Dvomaks\LaravelSendPulse\SendPulseServiceProvider;
+namespace Dvomaks\LaravelSendPulse;
 
 require __DIR__ . '/../vendor/autoload.php';
 

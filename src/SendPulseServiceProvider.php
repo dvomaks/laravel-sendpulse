@@ -3,7 +3,8 @@
 namespace Dvomaks\LaravelSendPulse;
 
 use Illuminate\Support\ServiceProvider;
-use Sendpulse\RestAPI\ApiClient;
+use Sendpulse\RestApi\Storage\FileStorage;
+use Sendpulse\RestApi\Storage\SessionStorage;
 
 class SendPulseServiceProvider extends ServiceProvider
 {
@@ -22,7 +23,7 @@ class SendPulseServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/config/laravel-sendpulse.php.php' => config_path('sendpulse.php')
+            __DIR__ . '/config/laravel-sendpulse.php' => config_path('sendpulse.php')
         ]);
     }
 
@@ -33,11 +34,17 @@ class SendPulseServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(ApiClient::class, function($app) {
+        $this->app->singleton(SendPulseApi::class, function($app) {
 
             $config = $app['config']['sendpulse'];
-            
-            return (new ApiClient($config['apiUserId'], $config['apiSecret'], null));
+
+            if ($config['storage'] === 'session') {
+                $storage = new SessionStorage();
+            } else {
+                $storage = new FileStorage();
+            }
+
+            return (new SendPulseApi($config['api_user_id'], $config['api_secret'], $storage));
         });
     }
 
@@ -48,6 +55,6 @@ class SendPulseServiceProvider extends ServiceProvider
      */
     public function provides(): array
     {
-        return [ApiClient::class];
+        return [SendPulseApi::class];
     }
 }
