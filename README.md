@@ -1,6 +1,6 @@
 # SendPulse Laravel Helper
 
-[![Build Status](https://travis-ci.org/dvomaks/laravel-sendpulse.svg?branch=master)](https://travis-ci.org/dvomaks/laravel-sendpulse)
+[![CircleCI](https://circleci.com/gh/dvomaks/laravel-sendpulse/tree/master.svg?style=shield)](https://circleci.com/gh/dvomaks/laravel-sendpulse/tree/master)
 
 A service provider and facade to set up and use the [SendPulse](https://sendpulse.com/) PHP library in Laravel 5.
 

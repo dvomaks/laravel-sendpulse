@@ -1,0 +1,72 @@
+version: 2.1
+
+jobs:
+  php73:
+    docker:
+      - image: circleci/php:7.3
+    steps:
+      - checkout
+      
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-
+
+      - run: composer install -n --prefer-dist
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+      
+      - run: ./vendor/bin/phpunit
+      
+  php74:
+    docker:
+      - image: circleci/php:7.4
+    steps:
+      - checkout
+      
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-
+
+      - run: composer install -n --prefer-dist
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+      
+      - run: ./vendor/bin/phpunit
+  
+  php80:
+    docker:
+      - image: circleci/php:8.0
+    steps:
+      - checkout
+      
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-
+
+      - run: composer install -n --prefer-dist
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+      
+      - run: ./vendor/bin/phpunit
+
+workflows:
+  test:
+    jobs:
+      - php73
+      - php74
+      - php80
