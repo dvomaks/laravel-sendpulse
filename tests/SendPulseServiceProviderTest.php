@@ -4,7 +4,7 @@ namespace Dvomaks\LaravelSendPulse;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-class SendPulseServiceProviderTest extends \PHPUnit_Framework_TestCase
+class SendPulseServiceProviderTest extends \PHPUnit\Framework\TestCase
 {
     public function test_register(): void
     {
